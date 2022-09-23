@@ -1,6 +1,12 @@
-# test_app
+# CodEswatini MyToDo App
 
-A new Flutter project.
+This project is what we built during the [CodEswatini Flutter Workshop](https://codeswatini.org/initiatives/build-with-flutter/). The workshop was meant as a starting point for those who are mainly new to Mobile app development.
+
+![Final Project](./docs/final_app.gif)
+
+
+# Project Structure
+![Project Structure](./docs/project_structure.png)
 
 ## Getting Started
 

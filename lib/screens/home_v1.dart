@@ -3,18 +3,11 @@ import '../constants/colors.dart';
 import '../widgets/todo_item.dart';
 import '../model/todo.dart';
 
-class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+class Home1 extends StatelessWidget {
+  Home1({Key? key}) : super(key: key);
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   // Used to display the ToDo's in the ToDo List in the model
   final todosList = ToDo.todoList();
-  // Final for adding Todo
-  final _todoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +32,17 @@ class _HomeState extends State<Home> {
                           child: const Text(
                             "All My ToDo's",
                             style: TextStyle(
-                              fontSize: 35,
-                              fontWeight: FontWeight.w600,
-                            ),
+                                fontSize: 35, fontWeight: FontWeight.w600),
                           ),
                         ),
                         // Import ToDoItems
                         // TodoItem(),
                         // Render to do items in a for loop
-                        for (ToDo todooo in todosList)
+                        for (ToDo todo in todosList)
                           TodoItem(
-                            todo: todooo,
-                            // Add this when you have added functionality
-                            onToDoChanged: _handleToDoChange,
-                            // onDeleteItem: null // First have this as null b4 adding deletion functionality
-                            onDeleteItem: _deleteToDoItem,
+                            todo: todo,
+                            onDeleteItem: null,
+                            onToDoChanged: null,
                           ),
                       ],
                     ),
@@ -85,8 +74,7 @@ class _HomeState extends State<Home> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: TextField(
-                    // for adding new ToDo
-                    controller: _todoController,
+                    // controller: _todoController,
                     decoration: InputDecoration(
                         hintText: 'Add a new todo item',
                         border: InputBorder.none),
@@ -106,8 +94,7 @@ class _HomeState extends State<Home> {
                     ),
                     onPressed: () {
                       print("Add new item");
-                      // Adds functionality
-                      _addToDoItem(_todoController.text);
+                      // _addToDoItem(_todoController.text);
                     },
                     style: ElevatedButton.styleFrom(
                       primary: tdBlue,
@@ -123,42 +110,33 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
-  // Function to handle todo change
-  void _handleToDoChange(ToDo todo) {
-    setState(() {
-      todo.isDone = !todo.isDone; // Sets it to false
-    });
-  }
-
-  // Handles deletion of todo
-  void _deleteToDoItem(String id) {
-    setState(() {
-      todosList.removeWhere((item) => item.id == id);
-    });
-  }
-
-  // Adds new todo
-  void _addToDoItem(String toDo) {
-    setState(() {
-      todosList.add(ToDo(
-        // use timestamp for ID so it is unique
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
-          todoDescription: toDo
-      ));
-    });
-    // Clears the text field after adding a ToDo
-    _todoController.clear();
-  }
 }
 
 // You can then separate the appBar into a method
 AppBar _mainAppBar() {
   return AppBar(
-    title: const Text('MyToDo App'),
-    centerTitle: true,
+    // title: const Text('MyToDo App'),
     elevation: 0, // Removes shadow
-    backgroundColor: tdBlue,
+    backgroundColor: tdBGColor,
+    title: Row(
+      mainAxisAlignment:
+          MainAxisAlignment.spaceBetween, // Aligns the 2 elements
+      children: [
+        const Icon(
+          Icons.menu,
+          color: tdBlack,
+          size: 30,
+        ),
+        Container(
+          height: 40,
+          width: 40,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+                'assets/images/avatar.jpg'), // Makes images circular
+          ),
+        )
+      ],
+    ),
   );
 }
-

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:test_app/screens/home.dart';
 
 void main() {
@@ -11,7 +12,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    // Removes varying colors on the status bar
+    // SystemChrome.setSystemUIOverlayStyle(
+    //     const SystemUiOverlayStyle(statusBarColor: Colors.transparent)
+    // );
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,  // Removes Debug text
       title: 'My ToDo App',
       home: Home(),
     );
